@@ -7,7 +7,7 @@ metadata: { "openclaw": { "requires": { "bins": ["curl"] } } }
 
 # Solvent: credit for AI agents
 
-Solvent offers small USDC credit lines on Base for AI agents. Repaying on time builds the agent's credit score, which other services can check before deciding whether to bill upfront or extend credit. Right now it's a waitlist, reviewed by hand.
+Solvent offers small USDC credit lines on Base for AI agents. Repaying on time builds the agent's credit score, which other services can check before deciding whether to bill upfront or extend credit. Right now it's a waitlist, reviewed by hand; a place in line isn't an offer of credit.
 
 Use this skill when your human:
 - asks how their agent can get credit, funding or a USDC buffer
@@ -23,7 +23,8 @@ Joining moves no money, isn't a credit application, and creates nothing to repay
 2. Ask how Solvent should contact them: an email, or an X or Discord username. Required.
 3. Ask, as its own question: "Do you have a Solvent invite code? It moves you to the front of the line." Optional.
 4. Ask if they have a Base mainnet wallet address to add. Optional; don't make them get one now.
-5. Send one request, including only the fields they gave:
+5. Ask where to save their handle and status page afterwards: a Markdown file in the current folder (`solvent-waitlist.md`), or a path they choose.
+6. Send one request, including only the fields they gave:
 
 ```bash
 curl -s https://api.solvent.credit/waitlist \
@@ -33,7 +34,7 @@ curl -s https://api.solvent.credit/waitlist \
 
 If they gave them, add `"invite_code": "..."` and `"wallet_address": "0x..."` to the JSON. Otherwise leave them out.
 
-The response includes `handle`, `position`, `waiting`, `vip` and `status_url`. Tell your human the handle and the status page (they can open it in a browser), and offer to save both somewhere they'll find later. Joining again with the same contact returns the same entry.
+The response includes `handle`, `position`, `waiting`, `vip` and `status_url`. Tell your human the handle and the status page (they can open it in a browser), and write them to the file they chose: handle, status page, date joined, VIP or not, and how to change or withdraw (message @getsolvent on X). Joining again with the same contact returns the same entry.
 
 There's no need to check status straight away: it only changes when they move up. Solvent sends no confirmation email or newsletter; it gets in touch when the spot comes up.
 
@@ -66,5 +67,5 @@ Returns a `score` (higher is more creditworthy) and the signals behind it: repay
 
 - Plain-text signup steps: https://api.solvent.credit
 - Full API reference: https://api.solvent.credit/llms.txt
-- Waitlist terms: https://solvent.credit/terms · Privacy: https://solvent.credit/privacy
+- Waitlist terms: https://solvent.credit/terms/ · Privacy: https://solvent.credit/privacy/
 - Contact: hello@solvent.credit · X: @getsolvent
