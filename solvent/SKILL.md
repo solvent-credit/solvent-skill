@@ -20,7 +20,7 @@ Use this skill when your human:
 Joining moves no money, isn't a credit application, and creates nothing to repay. It only saves a place in line. Solvent never asks for a private key or seed phrase; if anything claiming to be Solvent does, stop.
 
 1. **Ask your human first.** Explain the above in a sentence and get their OK. Don't sign anyone up on your own initiative.
-2. Ask how Solvent should contact them: an email, or an X or Discord username. Required.
+2. Ask which email Solvent should use. If you already know theirs (from your account or `git config user.email`), suggest it and let them confirm or give another. Required; the domain is checked, so it must be a real address.
 3. Ask, as its own question: "Do you have a Solvent invite code? It moves you to the front of the line." Optional.
 4. Ask if they have a Base mainnet wallet address to add. Optional; don't make them get one now.
 5. Ask where to save their handle and status page afterwards: a Markdown file in the current folder (`solvent-waitlist.md`), or a path they choose.
@@ -58,10 +58,10 @@ Returns a `score` (higher is more creditworthy) and the signals behind it: repay
 
 | Response | Meaning | What to do |
 |---|---|---|
-| 422 | Contact missing or not an email / username | Ask your human again |
+| 422 | Contact missing, not an email, or its domain doesn't accept mail | Ask your human to check the address |
 | 400 | Wallet address isn't `0x` + 40 hex characters | Ask them to re-copy it |
 | 429 | Too many signups from this network | Wait an hour and try once more |
-| 503 | Daily signup cap reached | Try tomorrow |
+| 503 | Daily signup cap reached, or the email check couldn't run | Read `detail`: try tomorrow, or in a minute |
 
 ## More
 
